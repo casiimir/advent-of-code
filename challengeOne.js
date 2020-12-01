@@ -203,11 +203,33 @@ const arr = (`
         .map(x => x -0);
 
 function challengeOne(arr) {
+  let result = 0;
   for (let i = 0; i < arr.length; i++) {
     for (let y = i+1; y <= arr.length; y++) {
-      if ((arr[i] + arr[y]) === 2020) return (arr[i] * arr[y]);
+      if ((arr[i] + arr[y]) === 2020) {
+        result = (arr[i] * arr[y]);
+      }
     }
   }
+  return result;
 }
 
-console.log(challengeOne(arr));
+function challengeOnePartTwo(arr) {
+  let thirdArr = [];
+  let result = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let y = i+1; y <= arr.length; y++) {
+      if ((arr[i] + arr[y]) < 2020) {
+        thirdArr.push(arr[i] + arr[y]);
+      }
+      for (let z = i+1; z <= arr.length; z++) {
+        if ((arr[i] + arr[y] + thirdArr[z]) === 2020) {
+          result = ((arr[i] * arr[y] * thirdArr[z]));
+        }
+      }
+    }
+  }
+  return(result);
+}
+
+console.log (`Step one: ${challengeOne(arr)} - Step two: ${challengeOnePartTwo(arr)}`);
