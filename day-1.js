@@ -1,5 +1,6 @@
-// Advent of code n. 1
+// AOC 1 Dec. 2020
 
+// Part One:
 // Specifically, they need you to find the two entries that sum to 2020 and then multiply those
 // two numbers together.
 // For example, suppose your expense report contained the following:
@@ -23,6 +24,12 @@ function challengeOne(arr) {
   }
   return result;
 }
+
+
+// Part One:
+// Using the above example again, the three entries that sum to 2020 are 979, 366, and 675.
+// Multiplying them together produces the answer, 241861950.
+// In your expense report, what is the product of the three entries that sum to 2020?
 
 function challengeOnePartTwo(arr) {
   let thirdArr = [];
