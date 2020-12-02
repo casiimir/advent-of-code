@@ -1,15 +1,9 @@
 function isValid(rangeMin, rangeMax, char, string) {
   let putInContainer = 0;
   for (el of string) {
-    if (el === char[0]) {
-      putInContainer++;
-    }
+    if (el === char[0]) putInContainer++
   }
-  if (putInContainer >= rangeMin &&
-      putInContainer <= rangeMax) {
-    return true;
-  }
-
+  if (putInContainer >= rangeMin && putInContainer <= rangeMax) return true;
 }
 
 const rawInput =`4-6 b: bbbdbtbbbj
@@ -1025,10 +1019,10 @@ function listOfPassword (input) {
     const max = string[0].split('-')[1]
     // Get the char element from the array, in position [1][0]
     const char = string[1][0];
-    if (isValid(min, max, char, string[2])) {
-      arrOfPass.push(string[2]);
-    }
+    if (isValid(min, max, char, string[2])) arrOfPass.push(string[2]);
   })
+
   return arrOfPass;
 }
 
+console.log(listOfPassword(rawInput).length);
