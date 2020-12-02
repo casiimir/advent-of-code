@@ -1,14 +1,10 @@
-// Part one:
-// suppose you have the following list:
-// 1-3 a: abcde
-// 1-3 b: cdefg
-// 2-9 c: ccccccccc
-// Each line gives the password policy and then the password. The password policy indicates the lowest and highest
-// number of times a given letter must appear for the password to be valid. For example, 1-3 a means that the password
-// must contain a at least 1 time and at most 3 times.
-// In the above example, 2 passwords are valid. The middle password, cdefg, is not; it contains no instances of b, but
-// needs at least 1. The first and third passwords are valid: they contain one a or nine c, both within the limits of
-// their respective policies. How many passwords are valid according to their policies?
+function isValid(rangeMin, rangeMax, char, string) {
+  let putInContainer = 0;
+  for (el of string) {
+    if (el === char[0]) putInContainer++
+  }
+  if (putInContainer >= rangeMin && putInContainer <= rangeMax) return true;
+}
 
 const rawInput =`4-6 b: bbbdbtbbbj
 1-6 g: ggvggbgggstg
@@ -1011,16 +1007,6 @@ const rawInput =`4-6 b: bbbdbtbbbj
 7-8 t: ttcfwtgjtcttv
 3-4 j: tjjj`.split('\n').map(x => x.split(' '));
 
-function isValid(rangeMin, rangeMax, char, string) {
-  let putInContainer = 0;
-  for (el of string) {
-    if (el === char[0]) putInContainer++
-  }
-  if (putInContainer >= rangeMin && putInContainer <= rangeMax) return true;
-}
-
-
-
 // Main function need input data like 'rawInput'.
 // Data Obtained from https://adventofcode.com/2020/day/2/input
 
@@ -1039,4 +1025,21 @@ function listOfPassword (input) {
   return arrOfPass;
 }
 
-console.log(listOfPassword(rawInput).length);
+// console.log(listOfPassword(rawInput).length);
+
+
+// Second Part
+// Cleaning REQUIRED !!
+arrOfPass = [];
+rawInput.map(x => {
+  // Element for example, the first line: '4-6 b: bbbdbtbbbj'
+  const char = x[1][0]; // b
+  const rangeMin = Number(x[0].split('-')[0]-1);  // 4 +1
+  const rangeMax = Number(x[0].split('-')[1])-1;  // 6 +1
+  if ((x[2][rangeMin] === char) && (x[2][rangeMax] !== char) ||
+      (x[2][rangeMin] !== char) && (x[2][rangeMax] === char)) {
+    arrOfPass.push(x[2])
+  }
+})
+
+console.log(arrOfPass.length);
