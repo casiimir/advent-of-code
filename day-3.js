@@ -322,28 +322,36 @@ const rawInput = `.....#....#...#.#..........#...
 ..##........................##.
 .....#....#..............#....#`.split('\n');
 
-function checkPosition(input) {
-  let pos = 0, numberOfTree = 0;
-
-  input.map((array) => {
-    // console.log(`Array[${i}]: ${array}`);  // ..##.......
-                                              // #...#...#..
-                                              // .#....#..#.
-                                              // ...
-    for (char of array) {
-      // console.log('Char: ', char);   // every single char of every single array
-                                        // Char:  #
-                                        // Char:  .
-                                        // Char:  .
-                                        // ...
+function checkPosition(input, posDown, posRight) {
+  let numOfTree = [], posY = 0, posX = 0;
+  let slopeLen = input[0].length;
+  
+  for (array in input) {
+    // If len max of every single array is >= the length max, ex. 11 (little)
+    // or 30 (rawInput)
+    if (posX >= slopeLen){
+      posX -= slopeLen;
     }
-                                
-    if (array[pos] === '#') numberOfTree++;
-    pos +=3;
-    if (pos >= array.length) pos -= array.length;    
-  })
-  return numberOfTree;
+
+    // Console the element right 3, down 1 of every single array in the input
+    // console.log(input[posY][posX]);
+    // If this value is equal to '#' put it into the array 'numOfTree'
+    if (input[posY][posX] === '#') {
+      numOfTree.push(input[posY][posX]);
+    } 
+
+    // Increment the position down (as posY) and position right (as posX)
+    // ex. right 3, down 1
+      posY += posDown
+      posX += posRight;
+      if (posY >= 323) break;
+  }
+  return numOfTree.length;
 }
 
-console.log(checkPosition(rawInput));
-
+console.log('First answer:', checkPosition(rawInput, 1, 3));
+console.log('Second answer:', checkPosition(rawInput, 1, 1) *
+            checkPosition(rawInput, 1, 3) *
+            checkPosition(rawInput, 1, 5) *
+            checkPosition(rawInput, 1, 7) *
+            checkPosition(rawInput, 2, 1));
